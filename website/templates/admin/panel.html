@@ -1,0 +1,398 @@
+{% extends "layout.html" %}
+{% block title %}Admin Panel{% endblock %}
+{% block content %}
+{{ ckeditor.load() }}
+<div class="container-fluid col-lg-10">
+  <!-- Panel Header START-->
+  <h1 class="display-2">Admin Panel</h1>
+  <br><br>
+  <!-- Pane Header STOP -->
+  <!-- Panel START -->
+  <div class="d-flex align-items-center justify-content-center w-100 p-3">
+      <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <button class="nav-link active" id="password-area-button" data-bs-toggle="pill" data-bs-target="#v-pills-password" type="button" role="tab" aria-controls="v-pills-password" aria-selected="true">Password</button>
+        <button class="nav-link" id="contact-us-area-button" data-bs-toggle="pill" data-bs-target="#v-pills-contact-info" type="button" role="tab" aria-controls="v-pills-contact-info" aria-selected="false">Contact Info</button>
+        <button class="nav-link" id="about-us-area-button" data-bs-toggle="pill" data-bs-target="#v-pills-about" type="button" role="tab" aria-controls="v-pills-about" aria-selected="false">About</button>
+        <button class="nav-link" id="services-area-button" data-bs-toggle="pill" data-bs-target="#v-pills-services" type="button" role="tab" aria-controls="v-pills-services" aria-selected="false">Servisler</button>
+        <button class="nav-link" id="projects-area-button" data-bs-toggle="pill" data-bs-target="#v-pills-projects" type="button" role="tab" aria-controls="v-pills-projects" aria-selected="false">Projeler</button>
+        <button class="nav-link" id="testimonial-area-button" data-bs-toggle="pill" data-bs-target="#v-pills-testimonial" type="button" role="tab" aria-controls="v-pills-testimonial" aria-selected="false">Referanslar (Testimonial)</button>
+        <button class="nav-link" id="team-members-area-button" data-bs-toggle="pill" data-bs-target="#v-pills-team-members" type="button" role="tab" aria-controls="v-pills-team-members" aria-selected="false">Takım Üyeleri</button>
+        <button class="nav-link" id="quote-area-button" data-bs-toggle="pill" data-bs-target="#v-pills-quote" type="button" role="tab" aria-controls="v-pills-quote" aria-selected="false">Teklifler</button>
+        <button class="nav-link" id="mail-area-button" data-bs-toggle="pill" data-bs-target="#v-pills-mail" type="button" role="tab" aria-controls="v-pills-mail" aria-selected="false">Mail Gönder</button>
+      </div>
+      <div class="tab-content overflow-y-scroll w-100 p-3" id="v-pills-tabContent" style="height: 100%;">
+        <!-- Password START -->
+        <div class="tab-pane fade show active" id="v-pills-password" role="tabpanel" aria-labelledby="v-pills-password-tab" tabindex="0"> 
+
+          <h3 class="text-center">Şifrenizi Değiştirin</h3>
+          <div class="row mb-3">
+            <form action="{{ url_for('auth.change_password') }}" method="post">
+              <div class="row mb-3">
+                <label for="password" class="col-sm-2 col-form-label col-form-label-lg">Eski Şifre</label>
+                <div class="col-sm-10">        
+                <input 
+                class="form-control form-control-lg"
+                type="password" 
+                name="old-password" 
+                placeholder="Your Old Password"/>
+        
+                </div>
+                <br>
+              </div>
+              <div class="row mb-3">
+                <label for="password" class="col-sm-2 col-form-label col-form-label-lg">Yeni Şifre</label>
+                <div class="col-sm-10">        
+                <input 
+                class="form-control form-control-lg"
+                type="password" 
+                name="new-password" 
+                placeholder="Your New Password"/>
+        
+                </div>
+                <br>
+              </div>
+              <div class="row mb-3">
+                <label for="password" class="col-sm-2 col-form-label col-form-label-lg">Şifrenizi Onaylayın</label>
+                <div class="col-sm-10">        
+                <input 
+                class="form-control form-control-lg"
+                type="password" 
+                name="password-confirm" 
+                placeholder="Password Confirm"/>
+        
+                </div>
+                <br>
+              </div>
+              <button type="submit" class="btn btn-primary float-end">Değiştir</button>
+            </form>
+          </div>
+        </div>
+        <!-- Password END -->
+        <!-- Contact Info START -->
+        <div class="tab-pane fade" id="v-pills-contact-info" role="tabpanel" aria-labelledby="v-pills-contact-info-tab" tabindex="0">
+          <h3 class="text-center">Contact Info değiştir</h3>
+          
+          <form action="{{ url_for('admin.change_contact_info') }}" method="post">
+            <div class="row mb-3">
+              <label for="adress" class="col-sm-2 col-form-label col-form-label-lg">Adres</label>
+              <div class="col-sm-10">        
+              <input 
+              class="form-control form-control-lg"
+              type="text" 
+              name="adress"
+              value="{{ contact_info['adress'] }}"/>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="text" class="col-sm-2 col-form-label col-form-label-lg">Metin</label>
+              <div class="col-sm-10">        
+              <input 
+              class="form-control form-control-lg"
+              type="text" 
+              name="text"
+              value="{{ contact_info['text'] }}"/>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="work-hours" class="col-sm-2 col-form-label col-form-label-lg">Çalışma Saatleri</label>
+              <div class="col-sm-10">        
+              <input 
+              class="form-control form-control-lg"
+              type="text" 
+              name="work-times"
+              value="{{ contact_info['work_times'] }}"/>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="phone-number" class="col-sm-2 col-form-label col-form-label-lg">Telefon Numarası</label>
+              <div class="col-sm-10">        
+              <input 
+              class="form-control form-control-lg"
+              type="text" 
+              name="phone-number"
+              value="{{ contact_info['phone_number'] }}"/>
+              </div>
+            </div>
+
+            <h5>Links</h5>
+            <div class="row mb-3">
+              <label for="facebook-link" class="col-sm-2 col-form-label col-form-label-lg">Facebook Link</label>
+              <div class="col-sm-10">        
+              <input 
+              class="form-control form-control-lg"
+              type="text" 
+              name="facebook-link"
+              value="{{ contact_info['links']['facebook'] }}"/>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="linkedin-link" class="col-sm-2 col-form-label col-form-label-lg">Linkedin Link</label>
+              <div class="col-sm-10">        
+              <input 
+              class="form-control form-control-lg"
+              type="text" 
+              name="linkedin-link"
+              value="{{ contact_info['links']['linkedin'] }}"/>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="twitter-link" class="col-sm-2 col-form-label col-form-label-lg">Twitter Link</label>
+              <div class="col-sm-10">        
+              <input 
+              class="form-control form-control-lg"
+              type="text" 
+              name="twitter-link"
+              value="{{ contact_info['links']['twitter'] }}"/>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="instagram-link" class="col-sm-2 col-form-label col-form-label-lg">Instagram Link</label>
+              <div class="col-sm-10">        
+              <input 
+              class="form-control form-control-lg"
+              type="text" 
+              name="instagram-link"
+              value="{{ contact_info['links']['instagram'] }}"/>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="map-link" class="col-sm-2 col-form-label col-form-label-lg">Google Maps Link</label>
+              <div class="col-sm-10">        
+              <input 
+              class="form-control form-control-lg"
+              type="text" 
+              name="map-link"
+              value="{{ contact_info['links']['google_maps'] }}"/>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary float-end">Değiştir</button>
+          </form>
+        </div>
+        <!-- Contact Info END -->
+        <!-- About Info START -->
+        <div class="tab-pane fade" id="v-pills-about" role="tabpanel" aria-labelledby="v-pills-about-tab" tabindex="0">
+          <h3 class="text-center">About bilgilerini değiştirin</h3>
+
+          <form action="{{ url_for('admin.change_about_info') }}" method="post">
+
+            <div class="row mb-3">
+              <label for="map-link" class="col-sm-2 col-form-label col-form-label-lg">Metin</label>
+              <div class="col-sm-10">        
+              <input 
+              class="form-control form-control-lg"
+              type="text" 
+              name="text"
+              value="{{ about['text'] }}"/>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="map-link" class="col-sm-2 col-form-label col-form-label-lg">Mutlu Müşteri Sayısı</label>
+              <div class="col-sm-10">        
+              <input 
+              class="form-control form-control-lg"
+              type="number" 
+              name="happy-clients"
+              value="{{ about['happy_clients'] }}"/>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="map-link" class="col-sm-2 col-form-label col-form-label-lg">Tamamlanan Proje Sayısı</label>
+              <div class="col-sm-10">        
+              <input 
+              class="form-control form-control-lg"
+              type="number" 
+              name="projects-done"
+              value="{{ about['projects_done'] }}"/>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary float-end">Değiştir</button>
+
+          </form>
+
+        </div>
+        <!-- About Info END -->
+        <!-- Services START -->
+        <div class="tab-pane fade" id="v-pills-services" role="tabpanel" aria-labelledby="v-pills-services-tab" tabindex="0">
+          <h3 class="text-center">Servisler</h3>
+
+          <div class="overflow-auto">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Başlık</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>  
+              </thead>
+              <tbody>
+                {% for service in services %}
+                  <tr>
+                    <th scope="row">{{ service.id }}</th>
+                    <td>{{ service.title }}</td>
+                    <td><a href="{{ url_for('admin.edit_service', pk=service.id) }}" class="btn btn-primary">Değiştir</a></td>
+                    <td><a href="{{ url_for('admin.delete_service', pk=service.id) }}" class="btn btn-danger">Sil</a></td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <a href="{{ url_for('admin.add_services') }}" class="btn btn-success float-end">Servis Ekle</a>
+        
+        </div>
+        <!-- Services END -->
+        
+        <!-- Projects START -->
+        <div class="tab-pane fade" id="v-pills-projects" role="tabpanel" aria-labelledby="v-pills-projects-tab" tabindex="0">
+          <h3 class="text-center">Projeler</h3>
+
+          <div class="overflow-auto">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Başlık</th>
+                  <th scope="col">Tip</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>  
+              </thead>
+              <tbody>
+                {% for project in projects %}
+                  <tr>
+                    <th scope="row">{{ project.id }}</th>
+                    <td>{{ project.title }}</td>
+                    <td>{{ project.type }}</td>
+                    <td><a href="{{ url_for('admin.edit_project', pk=project.id) }}" class="btn btn-primary">Değiştir</a></td>
+                    <td><a href="{{ url_for('admin.delete_project', pk=project.id) }}" class="btn btn-danger">Sil</a></td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <a href="{{ url_for('admin.add_project') }}" class="btn btn-success float-end">Proje Ekle</a>
+        </div>
+        <!-- Projects END -->
+        <!-- Team Member START-->
+        <div class="tab-pane fade" id="v-pills-team-members" role="tabpanel" aria-labelledby="v-pills-team-members-tab" tabindex="0">
+          <h3 class="text-center">Takım üyeleri</h3>
+
+          <div class="overflow-auto">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Üye ismi</th>
+                  <th scope="col">Tanım</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>  
+              </thead>
+              <tbody>
+                {% for member in members %}
+                  <tr>
+                    <th scope="row">{{ member.id }}</th>
+                    <td>{{ member.name }}</td>
+                    <td>{{ member.designation }}</td>
+                    <td><a href="{{ url_for('admin.edit_member', pk=member.id) }}" class="btn btn-primary">Değiştir</a></td>
+                    <td><a href="{{ url_for('admin.delete_member', pk=member.id) }}" class="btn btn-danger">Sil</a></td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <a href="{{ url_for('admin.add_member') }}" class="btn btn-success float-end">Üye Ekle</a>
+        </div>
+        <!-- Team Member END -->
+        <!-- Testimonial START -->
+        <div class="tab-pane fade" id="v-pills-testimonial" role="tabpanel" aria-labelledby="v-pills-testimonial-tab" tabindex="0">
+          <h3 class="text-center">Testimonial(Referanslar)</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Müşteri İsmi</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>  
+            </thead>
+            <tbody>
+              {% for testimonial in testimonials %}
+                <tr>
+                  <th scope="row">{{ testimonial.id }}</th>
+                  <td>{{ testimonial.client_name }}</td>
+                  <td><a href="{{ url_for('admin.edit_testimonial', pk=testimonial.id) }}" class="btn btn-primary">Değiştir</a></td>
+                  <td><a href="{{ url_for('admin.delete_testimonial', pk=testimonial.id) }}" class="btn btn-danger">Sil</a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          <a href="{{ url_for('admin.add_testimonial') }}" class="btn btn-success float-end">Referans Ekle</a>
+        </div>
+        <!-- Testimonial END-->
+        <!-- Quote START -->
+        <div class="tab-pane fade" id="v-pills-quote" role="tabpanel" aria-labelledby="v-pills-quote-tab" tabindex="0">
+          <h3 class="text-center">Teklifler</h3>
+          
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Müşteri İsmi</th>
+                <th scope="col">email</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>  
+            </thead>
+            <tbody>
+              {% for quote in quotes %}
+                <tr>
+                  <th scope="row">{{ quote.id }}</th>
+                  <td>{{ quote.name }}</td>
+                  <td>{{ quote.email }}</td>
+                  <td><a href="{{ url_for('admin.view_quote', pk=quote.id) }}" class="btn btn-primary">Görüntüle</a></td>
+                  <td><a href="{{ url_for('admin.delete_quote', pk=quote.id) }}" class="btn btn-danger">Sil</a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <!-- Quote END -->
+        <!-- Mail START -->
+        <div class="tab-pane fade" id="v-pills-mail" role="tabpanel" aria-labelledby="v-pills-mail-tab" tabindex="0">
+          <h3 class="text-center">Mail Gönder</h3>
+          <p>Üye sayısı: {{ subscribers_count }}</p>
+          <form action="{{ url_for('admin.send_mail') }}" method="post">
+            <div class="row mb-3">
+              <label for="subject" class="col-sm-2 col-form-label col-form-label-lg">Konu</label>
+              <div class="col-sm-10">        
+              <input 
+              class="form-control form-control-lg"
+              type="text" 
+              name="subject"/>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label col-form-label-lg">İçerik</label>
+              <div class="col-sm-10">        
+              {{ ckeditor.create() }}
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary float-end">Gönder</button>
+          </form>
+        </div>
+        <!-- Mail END -->
+      </div>
+  </div>
+  <br><br><br>
+  {% if session['username'] == 'admin' %}
+  <a class="btn btn-secondary" href="{{ url_for('auth.register_admin') }}">Admin ekle</a>
+  {% endif %}
+  <a class="btn btn-danger float-end" href="{{ url_for('auth.logout') }}">Çıkış Yap</a>
+  <!-- Panel END -->
+</div>
+{% endblock %}

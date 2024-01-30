@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% block title %}Üye Değiştir{% endblock %}
+{% block content %}
+<div class="container-fluid col-lg-10">
+    <h3 class="text-center">Üye Değiştir</h3>
+    <form action="{{ url_for('admin.edit_member', pk=member.id) }}" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="name" class="form-label">Tam isim*</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="isim" value="{{ member.name }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="designation" class="form-label">Tanım*</label>
+            <input type="text" class="form-control" id="designation" name="designation" placeholder="Tanım" value="{{ member.designation }}" required>
+        </div>
+        
+        <h3>Sosyal Medya</h3>
+        <div class="mb-3">
+            <label for="f-link" class="form-label">Facebook Link</label>
+            <input type="text" class="form-control" id="fb-link" name="fb-link" placeholder="Facebook Link" value="{{ member.fb_link }}">
+        </div>
+        <div class="mb-3">
+            <label for="i-link" class="form-label">Instagram Link</label>
+            <input type="text" class="form-control" id="i-link" name="i-link" placeholder="Instagram Link" value="{{ member.i_link }}">
+        </div>
+        <div class="mb-3">
+            <label for="t-link" class="form-label">Twitter Link</label>
+            <input type="text" class="form-control" id="t-link" name="t-link" placeholder="Instagram Link" value="{{ member.t_link }}">
+        </div>
+        <hr>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="image">Üye Fotoğrafı</label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/png, image/jpeg, image/jpg">
+        </div>
+
+        <button type="submit" class="btn btn-success float-end">Değiştir</button>
+    </form>
+</div>
+<br><br><br>
+{% endblock %}

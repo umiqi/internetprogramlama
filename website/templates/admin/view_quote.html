@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block title %}Teklif{% endblock %}
+{% block content %}
+    <div class="container-fluid col-lg-10">
+        <h1 class="text-center">Teklif Görüntüle</h1>
+        <h3 class="header-3"><strong>İsim:</strong>{{ quote.name }}</h3>
+        <h3><strong>E-Mail:</strong>{{ quote.email }}</h3>
+        <h3><strong>Mobile:</strong>{{ quote.mobile }}</h3>
+        <h3><strong>Servis:</strong>{{ quote.service }}</h3>
+        <p class="fs-5">{{ quote.note }}</p>
+    </div>
+{% endblock %}

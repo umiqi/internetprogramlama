@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}Servis Ekle{% endblock %}
+{% block content %}
+<div class="container-fluid col-lg-10">
+    <form action="{{ url_for('admin.add_services') }}" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="title" class="form-label">Başlık</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Başlığın" value="" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Açıklama</label>
+            <input type="text" class="form-control" id="title" name="description" placeholder="Açıklama" value="" required>
+        </div>
+
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="image">Servis fotoğrafı</label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/png, image/jpeg, image/jpg" required>
+        </div>
+
+        <button type="submit" class="btn btn-success float-end">Ekle</button>
+    </form>
+</div>
+<br><br><br>
+{% endblock %}

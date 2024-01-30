@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}Referans Ekle{% endblock %}
+{% block content %}
+<div class="container-fluid col-lg-10">
+    <form action="{{ url_for('admin.add_testimonial') }}" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="client-name" class="form-label">Müşteri İsmi</label>
+            <input type="text" class="form-control" id="client-name" name="client-name" placeholder="Müşteri İsmi" value="" required>
+        </div>
+        <div class="mb-3">
+            <label for="comment" class="form-label">Yorum</label>
+            <input type="text" class="form-control" id="comment" name="comment" placeholder="Yorum" value="" required>
+        </div>
+        <div class="mb-3">
+            <label for="profession" class="form-label">Meslek</label>
+            <input type="text" class="form-control" id="profession" name="profession" placeholder="Meslek" value="">
+        </div>
+
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="image">Müşteri fotoğrafı</label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/png, image/jpeg, image/jpg" required>
+        </div>
+
+        <button type="submit" class="btn btn-success float-end">Ekle</button>
+    </form>
+</div>
+<br><br><br>
+{% endblock %}
